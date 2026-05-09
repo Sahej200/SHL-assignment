@@ -110,7 +110,7 @@ client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY", ""))
 
 def call_claude(messages: list[dict]) -> str:
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=1500,
         system=SYSTEM_PROMPT,
         messages=messages,
