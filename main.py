@@ -186,6 +186,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def root():
+    return {"status": "ok", "service": "SHL Assessment Advisor"}
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
