@@ -8,11 +8,12 @@ A stateless FastAPI service that acts as an intelligent SHL assessment recommend
 
 ```
 shl_agent/
-├── main.py            # FastAPI app + agent logic
-├── catalog.json       # SHL catalog (119 assessments scraped from shl.com)
-├── requirements.txt   # Python dependencies
-├── Dockerfile         # Container image
-├── test_agent.py      # Behavioral test suite
+├── main.py                  # FastAPI app + agent logic
+├── catalog.json             # SHL catalog (377 assessments scraped from shl.com)
+├── requirements.txt         # Python dependencies
+├── Dockerfile               # Container image
+├── test_agent.py            # Behavioral test suite
+├── sample_conversations/    # 10 example agent conversations (C1–C10)
 └── README.md
 ```
 
@@ -113,18 +114,20 @@ Returns `{"status": "ok"}` with HTTP 200.
 
 ## Catalog
 
-The catalog (`catalog.json`) contains **119 SHL assessments** scraped from [shl.com/products/product-catalog](https://www.shl.com/products/product-catalog/), covering:
+The catalog (`catalog.json`) contains **377 SHL assessments** scraped from [shl.com/products/product-catalog](https://www.shl.com/products/product-catalog/), covering:
 
 | Type | Count | Description |
 |---|---|---|
-| K — Knowledge & Skills | 56 | Technical skill tests (Java, Python, SQL, AWS, …) |
-| A — Ability & Aptitude | 34 | Cognitive/numerical/verbal reasoning |
-| P — Personality & Behavior | 22 | OPQ32r, MQ, work styles |
-| B — Biodata & SJT | 18 | Situational judgment, job-focused |
-| S — Simulations | 12 | Coding simulations, MS Office sims |
-| C — Competencies | 4 | Competency frameworks |
+| K — Knowledge & Skills | 240 | Technical skill tests (Java, Python, SQL, AWS, …) |
+| P — Personality & Behavior | 66 | OPQ32r, MQ, work styles |
+| S — Simulations | 43 | Coding simulations, MS Office sims |
+| A — Ability & Aptitude | 32 | Cognitive/numerical/verbal reasoning |
+| C — Competencies | 19 | Competency frameworks |
+| B — Biodata & SJT | 17 | Situational judgment, job-focused |
+| D — Development & 360 | 7 | 360 feedback tools |
 | E — Assessment Exercises | 2 | Assessment center exercises |
-| D — Development & 360 | 2 | 360 feedback tools |
+
+Each catalog entry includes: `name`, `url`, `test_types`, `description`, `job_levels`, `duration`, `languages`, `remote`, and `adaptive` fields.
 
 ---
 

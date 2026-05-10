@@ -19,9 +19,17 @@ def _catalog_summary() -> str:
         desc  = item.get("description", "")[:120]
         levels = ", ".join(item.get("job_levels", []))
         families = ", ".join(item.get("job_families", []))
+        duration = item.get("duration", "")
+        languages = item.get("languages", [])
+        lang_str = ", ".join(languages[:5])
+        if len(languages) > 5:
+            lang_str += f" (+{len(languages)-5} more)"
+        remote = item.get("remote", "")
+        adaptive = item.get("adaptive", "")
         lines.append(
             f'- NAME: "{item["name"]}" | URL: {item["url"]} | TYPES: [{types}] '
-            f'| LEVELS: {levels} | FAMILIES: {families} | DESC: {desc}'
+            f'| LEVELS: {levels} | FAMILIES: {families} | DURATION: {duration} '
+            f'| LANGUAGES: {lang_str} | REMOTE: {remote} | ADAPTIVE: {adaptive} | DESC: {desc}'
         )
     return "\n".join(lines)
 
