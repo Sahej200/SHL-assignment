@@ -246,10 +246,23 @@ function switchTab(name, btn) {
 
 function setInput(val) { chatInput.value = val; chatInput.focus(); }
 
+function renderMarkdown(text) {
+  return text
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/^- (.+)$/gm, '• $1')
+    .replace(/\n/g, '<br>');
+}
+
 function appendMsg(role, text) {
   const d = document.createElement('div');
   d.className = 'msg msg-' + role;
-  d.textContent = text;
+  if (role === 'agent') {
+    d.innerHTML = renderMarkdown(text);
+  } else {
+    d.textContent = text;
+  }
   chatBox.appendChild(d);
   chatBox.scrollTop = chatBox.scrollHeight;
   return d;
