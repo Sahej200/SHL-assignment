@@ -5,6 +5,7 @@ from typing import Optional
 import anthropic
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 # ── Load catalog ─────────────────────────────────────────────────────────────
@@ -177,6 +178,13 @@ def parse_response(raw: str) -> tuple[str, list[Recommendation], bool]:
 
 # ── FastAPI app ───────────────────────────────────────────────────────────────
 app = FastAPI(title="SHL Assessment Advisor")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/health")
 def health():
